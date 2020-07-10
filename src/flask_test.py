@@ -1,4 +1,4 @@
-import httplib
+import http.client
 
 from flask import Flask, request, send_file
 import addressbook_pb2
@@ -41,20 +41,22 @@ def ListPeople(address_book):
 def load():
     address_book.ParseFromString(request.data)
 
-    print(address_book)
+    print (address_book)
 
-    return '', httplib.NO_CONTENT
+    return '', http.client.NO_CONTENT
 
 
 @app.route('/save', methods=['GET'])
 def save():
     return send_file(
         io.BytesIO(address_book.SerializeToString()),
-        as_attachment=True,
-        attachment_filename='abc.abc',
+        as_attachment=False,
         mimetype='attachment/x-protobuf'
     )
 
+@app.route('/test', methods=['GET'])
+def test():
+    return json.dumps(data,ensure_ascii=False)
 
 if __name__=='__main__':
     app.run(debug=True)
