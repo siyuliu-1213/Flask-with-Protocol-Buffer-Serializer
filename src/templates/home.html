@@ -3,10 +3,11 @@
 <head>
 	<title>test</title>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="//cdn.rawgit.com/dcodeIO/protobuf.js/6.9.0/dist/protobuf.js"></script>
+	<!-- <script src="//cdn.rawgit.com/dcodeIO/protobuf.js/6.9.0/dist/protobuf.js"></script> -->
 </head>
 <body>
-	<script type="text/javascript" src="./app.js"></script>
-
+	<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+	<h2>Homepage!</h2>
+	
 </body>
 </html>
