@@ -1,6 +1,6 @@
 import http.client
 
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, render_template
 import addressbook_pb2
 import io
 
@@ -57,6 +57,10 @@ def save():
 @app.route('/test', methods=['GET'])
 def test():
     return json.dumps(data,ensure_ascii=False)
+
+@app.route('/')
+def index():
+    return render_template('home.html', name=name)
 
 if __name__=='__main__':
     app.run(debug=True)
