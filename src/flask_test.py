@@ -66,8 +66,6 @@ def test_json():
 
 @app.route('/protobuf', methods=['GET'])
 def test_protobuf():  
-    # with open("protofile1.pb") as f:
-    #     return jsonify(f.read())
     people = address_book.people.add()
     people.id = 3
     people.name = "siyu"
@@ -78,31 +76,6 @@ def test_protobuf():
     phone.type = addressbook_pb2.Person.WORK
 
     print(address_book)
-
-    # proto_people = []
-    
-    # proto_people.append(addressbook_pb2.Person(
-    #     name = "siyu",
-    #     id = 4,
-    #     PhoneType = 
-    # ))
-    
-    # article_collection_pb2.ArticleCollection(articles = proto_articles)
-
-    # ab_serialized = address_book.SerializeToString()
-
-    # print(ab_serialized)
-
-    # ab_dict = jsons.dump(ab_serialized)
-
-    # print(ab_dict)
-
-    # return jsonify(ab_dict)
-
-    # return send_file(
-    #     io.BytesIO(address_book.SerializeToString()),
-    #     mimetype='application/x-protobuf'
-    # )
 
     return address_book.SerializeToString()
 

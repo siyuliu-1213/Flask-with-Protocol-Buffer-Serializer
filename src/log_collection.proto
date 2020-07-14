@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package tutorial;
+
+message Log {
+  string log = 1;
+}
+
+message LogCollection {
+  repeated Log logs = 1;
+}
