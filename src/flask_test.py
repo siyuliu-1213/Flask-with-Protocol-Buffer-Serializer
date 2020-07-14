@@ -1,6 +1,7 @@
 import http.client
 
-from flask import Flask, request, send_file, render_template
+from flask import Flask, request, send_file, render_template, jsonify, json, make_response
+import jsons
 import addressbook_pb2
 import io
 
@@ -54,9 +55,56 @@ def save():
         mimetype='attachment/x-protobuf'
     )
 
-@app.route('/test', methods=['GET'])
-def test():
-    return json.dumps(data,ensure_ascii=False)
+user = {
+    "name": "siyu",
+    "ID": 1
+}
+
+@app.route('/json', methods=['GET'])
+def test_json():
+    return jsonify(name=user["name"], ID=user["ID"])
+
+@app.route('/protobuf', methods=['GET'])
+def test_protobuf():  
+    # with open("protofile1.pb") as f:
+    #     return jsonify(f.read())
+    people = address_book.people.add()
+    people.id = 3
+    people.name = "siyu"
+    people.email = "test_protobuf@amazon.com"
+
+    phone = people.phones.add()
+    phone.number = "1234567"
+    phone.type = addressbook_pb2.Person.WORK
+
+    print(address_book)
+
+    # proto_people = []
+    
+    # proto_people.append(addressbook_pb2.Person(
+    #     name = "siyu",
+    #     id = 4,
+    #     PhoneType = 
+    # ))
+    
+    # article_collection_pb2.ArticleCollection(articles = proto_articles)
+
+    # ab_serialized = address_book.SerializeToString()
+
+    # print(ab_serialized)
+
+    # ab_dict = jsons.dump(ab_serialized)
+
+    # print(ab_dict)
+
+    # return jsonify(ab_dict)
+
+    # return send_file(
+    #     io.BytesIO(address_book.SerializeToString()),
+    #     mimetype='application/x-protobuf'
+    # )
+
+    return address_book.SerializeToString()
 
 @app.route('/')
 def index():

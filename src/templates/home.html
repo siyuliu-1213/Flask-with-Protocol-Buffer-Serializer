@@ -4,10 +4,13 @@
 	<title>test</title>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<!-- <script src="//cdn.rawgit.com/dcodeIO/protobuf.js/6.9.0/dist/protobuf.js"></script> -->
+	<script type="text/javascript" src="{{ url_for('static', filename='bundle.js') }}"></script>
 </head>
 <body>
-	<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
-	<h2>Homepage!</h2>
 	
+	<h2>Homepage!</h2>
+	<button id="button" type="button" onclick="window.get_json_test();">GET JSON test</button>
+	<p id="json"></p>
+	<button id="button" type="button" onclick="window.get_protobuf_test();">GET protobuf test</button>
 </body>
 </html>
