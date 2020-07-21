@@ -79,6 +79,7 @@ def test_protobuf():
 
     return address_book.SerializeToString()
 
+
 @app.route('/')
 def index():
     return render_template('home.html')

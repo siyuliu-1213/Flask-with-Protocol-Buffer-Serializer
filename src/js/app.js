@@ -23,6 +23,7 @@ function get_protobuf_test(){
 		if (err)
 	        console.log(err)
 		AddressbookMessage = root.lookupType("tutorial.AddressBook");
+		console.log(AddressbookMessage)
 	});
 
 	axios.get("http://127.0.0.1:5000/protobuf",{
@@ -37,7 +38,40 @@ function get_protobuf_test(){
 	})
 }
 
+function log_protobuf(){
+	var input = document.getElementById("search").elements[0];
+	console.log(input.value);
+
+
+	var protobuf = require("protobufjs");
+	var axios = require('axios');
+	
+
+	var LogMessage;
+
+	protobuf.load("static/log_collection.proto", function(err, root){
+		if (err)
+	        console.log(err)
+		LogMessage = root.lookupType("tutorial.LogCollection");
+	});
+
+	axios.post("http://127.0.0.1:5000/pid",{
+		pid: input.value
+	},{
+		responseType: "arraybuffer"
+	}).then(function(response){
+		console.log('response', response)
+		var msg = LogMessage.decode(new Uint8Array(response.data)) 
+		console.log('msg', msg)
+		var resObj = LogMessage.toObject(msg)
+		console.log('resObj', resObj)
+	})
+
+	
+}
+
 window.get_json_test=get_json_test;
 window.get_protobuf_test=get_protobuf_test;
+window.log_protobuf=log_protobuf;
 
 
